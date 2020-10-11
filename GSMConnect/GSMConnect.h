@@ -1,3 +1,4 @@
+#pragma once
 #define TINY_GSM_MODEM_SIM800
 
 #if !defined(TINY_GSM_RX_BUFFER)

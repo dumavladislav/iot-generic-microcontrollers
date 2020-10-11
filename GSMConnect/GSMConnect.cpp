@@ -18,8 +18,8 @@ int8_t GSMConnect::connect(char* apn, char* gprsUser, char* gprsPass) {
     
     // modem = new TinyGsm(SerialAT);
     SerialMon.println("Initializing modem->..");
-    modem->restart();
-    // modem->init();
+    // modem->restart();
+    modem->init();
 
     SerialMon.print("Modem Info: ");
     SerialMon.println(modem->getModemInfo());

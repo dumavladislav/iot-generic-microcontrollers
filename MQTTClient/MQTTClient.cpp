@@ -35,11 +35,11 @@ void MQTTClient::authorizationRequest() {
 
 void MQTTClient::mqttConnect(char *mqttUsr, char *mqttPasswd)
 {
-    // Serial.print("Start MQTT Connect...");
+    Serial.print("Start MQTT Connect...");
     // Loop until we're reconnected
     while (!client.connected())
     {
-        // Serial.println("Not Connected...");
+        Serial.println("Not Connected...");
         unsigned long now = millis();
         // convert now to string form
         // char *dt = ctime(&now);
@@ -52,17 +52,17 @@ void MQTTClient::mqttConnect(char *mqttUsr, char *mqttPasswd)
         //snprintf(deviceSessionId, 50, "%s_%s", deviceId, String(random(0xffff), HEX).c_str());
         deviceSessionId = (char *)String(String(deviceId) + String(random(0xffff), HEX)).c_str();// + String(millis())).c_str();
         //deviceSessionId = (char*) ( String("sdfsdf") + String("_444") ).c_str(); 
-        // Serial.println(String(String(deviceId) + String(random(0xffff), HEX)).c_str());
+        Serial.println(String(String(deviceId) + String(random(0xffff), HEX)).c_str());
         // Serial.println(deviceSessionId);
         // Serial.println(mqttUsr);
         // Serial.println(mqttPasswd);
-        // Serial.print("Attempting MQTT connection...");
+        Serial.print("Attempting MQTT connection...");
         // Attempt to connect
         if (!client.connect(String(String(deviceId) + String(random(0xffff), HEX)).c_str(), mqttUsr, mqttPasswd))
         {
-            // Serial.print("failed, rc=");
-            // Serial.print(client.state());
-            // Serial.println(" try again in 5 seconds");
+            Serial.print("failed, rc=");
+            Serial.print(client.state());
+            Serial.println(" try again in 5 seconds");
             // Wait 5 seconds before retrying
             delay(5000);
         }
@@ -77,7 +77,7 @@ void MQTTClient::keepAlive(char *mqttUsr, char *mqttPasswd)
     {
         mqttConnect(mqttUsr, mqttPasswd);
     }
-    client.loop();
+    //client.loop();
 };
 
 void MQTTClient::setCallback(MQTT_CALLBACK_SIGNATURE)

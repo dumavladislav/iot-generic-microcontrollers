@@ -1,3 +1,4 @@
+#pragma once
 #include <TinyGPS++.h>
 #include <SoftwareSerial.h>
 
