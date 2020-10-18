@@ -11,9 +11,11 @@ MQTTClient::MQTTClient(char *devId)
 
 }
 
-void MQTTClient::init(char *mqttServer, int mqttPort, Client* networkClient) {
+void MQTTClient::init(char *mqttServer, int mqttPort, Client* networkClient, uint16_t keepalive_timeout) {
     client.setClient(*networkClient);
     client.setServer(strdup(mqttServer), mqttPort);
+    if (keepalive_timeout > 0) client.setKeepAlive(keepalive_timeout);
+    client.setSocketTimeout(60);
 }
 
 void MQTTClient::connect(char *mqttUsr, char *mqttPasswd)
@@ -58,7 +60,9 @@ void MQTTClient::mqttConnect(char *mqttUsr, char *mqttPasswd)
         // Serial.println(mqttPasswd);
         Serial.print("Attempting MQTT connection...");
         // Attempt to connect
-        if (!client.connect(String(String(deviceId) + String(random(0xffff), HEX)).c_str(), mqttUsr, mqttPasswd))
+        
+        //if (!client.connect(String(String(deviceId) + String(random(0xffff), HEX)).c_str(), mqttUsr, mqttPasswd))
+        if (!client.connect(String(String(deviceId) + String(random(0xffff), HEX)).c_str(), mqttUsr, mqttPasswd, "/GREETINGS", 0, false, "Hi There!", true))
         {
             Serial.print("failed, rc=");
             Serial.print(client.state());
@@ -77,7 +81,7 @@ void MQTTClient::keepAlive(char *mqttUsr, char *mqttPasswd)
     {
         mqttConnect(mqttUsr, mqttPasswd);
     }
-    //client.loop();
+    client.loop();
 };
 
 void MQTTClient::setCallback(MQTT_CALLBACK_SIGNATURE)

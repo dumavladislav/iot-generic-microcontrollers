@@ -14,7 +14,7 @@ class MQTTClient
 
 public:
     MQTTClient(char *devId);
-    void init(char *mqttServer, int mqttPort, Client* networkClient);
+    void init(char *mqttServer, int mqttPort, Client* networkClient, uint16_t keepalive_timeout);
     void    connect(char *mqttUsr, char *mqttPasswd);
     boolean isConnected();
     void    authorizationRequest();
