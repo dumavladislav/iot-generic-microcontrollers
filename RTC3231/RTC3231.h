@@ -5,12 +5,13 @@
 
 #define countof(a) (sizeof(a) / sizeof(a[0]))
 
-class RealTimeClock {
+class RTC3231 {
 
 public:
 
-    RealTimeClock();
-    void init();
+    RTC3231();
+    void init(const char *compileDate, const char *compileTime, uint32_t timeStamp);
+    uint32_t getTimeStamp();
     String getDateTime();
     String getDate();
     String getTime();
@@ -20,6 +21,6 @@ private:
     // RtcDS3231<TwoWire> Rtc{Wire};
     DateTime readDateTime();
 
-    RTC_DS1307 rtc;
+    RTC_DS3231 rtc;
 
 };
