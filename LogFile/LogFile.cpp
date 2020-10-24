@@ -104,14 +104,19 @@ void LogFile::createFile() {
     fileStorage->mkdir(archivePath);
   }
 
-  Serial.print("OPENING FILE... ");
+  // openFile();
+
+}
+
+void LogFile::openFile() {
+  // Serial.print("OPENING FILE... ");
   recordsCounter = 0;
   if(!fileStorage->exists(fileFullPath))
     file = fileStorage->open(fileFullPath, FILE_WRITE);
   else
     file = fileStorage->open(fileFullPath, FILE_APPEND);
     
-  Serial.print("FILE OPENED!");
+  // Serial.print("FILE OPENED!"); 
 }
 
 void LogFile::deleteFile() {
@@ -124,7 +129,7 @@ void LogFile::archiveFile() {
   Serial.print("Copying file: ");
   Serial.print(fileFullPath);
   Serial.print(" INTO: ");
-  Serial.print(archivePath + "/" + serviceName + "_" + rtc->getTimeStamp());
+  Serial.println(archivePath + "/" + serviceName + "_" + rtc->getTimeStamp());
   fileStorage->rename(fileFullPath, archivePath + "/" + serviceName + "_" + rtc->getTimeStamp());
 }
 
@@ -134,9 +139,9 @@ void LogFile::rotateFile() {
 }
 
 void LogFile::closeFile() {
-  Serial.println("Closing File...");
+  // Serial.println("Closing File...");
   file.close();
-  Serial.println("File closed...");
+  // Serial.println("File closed...");
 }
 
 
@@ -160,6 +165,8 @@ void LogFile::writeString(String logString) {
         // }
         // recordsInFileCounter = 1;
       }
+
+      openFile();
       
       // File dataFile = SD.open(String("/") + (String(deviceId)+String("_")+String(filesCounter) + String(".txt")).c_str(), FILE_WRITE);
       // file = fileStorage->open(fileFullPath, FILE_APPEND);
@@ -173,15 +180,17 @@ void LogFile::writeString(String logString) {
         // }
 
         file.println(logString);
+        // file.flush();
         // file.close();
         // print to the serial port too:
-        Serial.print("Saving String: ");
-        Serial.println(logString);
+        // Serial.print("Saving String: ");
+        // Serial.println(logString);
       }
       // if the file isn't open, pop up an error:
       else {
         Serial.println("error opening file");
       }
+      closeFile();
 }
 
 void LogFile::logString(String logString) {

@@ -17,8 +17,9 @@ public:
     uint8_t gpsMinute = 0;
     uint8_t gpsSecond = 0;
     uint8_t gpsCentisecond = 0;
-
-    GpsData& operator=(const GpsData& rhs) {};
+    uint32_t rtcTimestamp = 0;
+    
+    // GpsData& operator=(const GpsData& rhs) {};
 
     String toString();
 };    

@@ -18,8 +18,9 @@ public:
     void createFile();
     // void copyFile();
     // void moveFile(String destFolder);
-    void deleteFile();
+    void openFile();
     void closeFile();
+    void deleteFile();
     void archiveFile();
     void rotateFile();
     void writeString(String logString);
