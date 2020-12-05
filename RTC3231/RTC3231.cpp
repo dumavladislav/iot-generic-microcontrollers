@@ -6,12 +6,15 @@ RTC3231::RTC3231() {
 
 void RTC3231::init(const char *compileDate, const char *compileTime, uint32_t timeStamp) {
 
+    Serial.println('Initializing RTC...');
+
     if (! rtc.begin()) {
         Serial.println("Couldn't find RTC");
         // Serial.flush();
         // abort();
     }
 
+    // Serial.println('Adjusting time');
     // rtc.adjust(DateTime(F(compileDate), F(compileTime)));
     // rtc.adjust(DateTime(timeStamp));
 
