@@ -8,6 +8,6 @@ struct ModeSettings_ON {
 
 struct MotionSensorSettings {
     int relayMode = 0;
-    int msDriveModeDuration = 20;
+    int msDriveModeDuration = 60;
     int onModeDuration = 1800;  
 };
