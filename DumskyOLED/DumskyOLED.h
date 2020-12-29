@@ -5,7 +5,7 @@ class DumskyOLED {
 
 public:
 
-    void init();
+    void init(const uint8_t font_size);
     void clear();
     void addString(String str);
     void renderString(String str);
@@ -15,6 +15,9 @@ private:
 
     uint8_t currString = 0;
     uint8_t width, height = 0;
+
+    uint8_t font_size;
+    const uint8_t *font;
 
     // U8G2_SSD1306_128X32_UNIVISION_F_SW_I2C u8g2{U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE};
     U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2{U8G2_R0,  /* reset=*/ U8X8_PIN_NONE};
